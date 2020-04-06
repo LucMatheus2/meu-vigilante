@@ -1,0 +1,4 @@
+Umbrello 2.5X
+Inkscape 0.94
+GIMP 2.8
+Visual Studio Code
