@@ -1,0 +1,5 @@
+Onde consegui a paleta de cores:
+https://flatuicolors.com/palette/us
+
+React Native e Banco de dados:
+https://www.linkedin.com/pulse/react-native-como-pegar-dados-do-banco-de-mysql-rest-penha-simplicio/

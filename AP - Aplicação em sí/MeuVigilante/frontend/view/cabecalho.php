@@ -24,9 +24,9 @@
         <nav>
             <button class="btnMenuMobile">&#10060;</button>
                 <ul>
-                    <li><a href="#">Opção 1</a></li>
-                    <li><a href="#">Opção 2</a></li>
-                    <li><a href="#">Opção 3</a></li>
+                    <li><a href="#">Efetuar Denuncias</a></li>
+                    <li><a href="#">Consultar Denuncias</a></li>
+                    <li><a href="#">Logout</a></li>
                 </ul>
             <div id="rodape-mobile">
                 &copy; 2020 - Universidade do Estado do Pará
