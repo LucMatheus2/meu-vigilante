@@ -1,0 +1,25 @@
+Ferramentas de desenvolvimento
+
+(?) - se eu conseguir
+
+Plataforma usada em Desenvolvimento = Linux Mint 19.3 (Tricia)
+Plataforma usada em Produção = Android 9.0
+Editor de código = Visual Studio Code
+Arquivos de Backend = PHP 7
+Arquivos de Frontend = HTML5 + CSS3 + JavaScript
+Logomarcas & identidade visual = Inkscape & GIMP
+Versionamento de Código = Git
+Protótipo de telas = Figma
+(?) Protótipo Alpha = Phonegap
+Plataforma final = React Native
+Documentação Textual = WPS Office
+Diagramas UML = Umbrello
+Testes em javascript = NodeJs
+Banco de dados = MySQL
+Ferramenta de manuseio do banco = MySQL Workbench
+Anotações = Notion
+
+<?php if ($_GET['vsl' == true) { ?>
+
+
+<?php } ?>

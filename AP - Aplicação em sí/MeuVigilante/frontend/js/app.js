@@ -2,6 +2,8 @@
 var isAnonimo = false
 var txtAviso = document.getElementById('aviso')
 var txtLogin = document.getElementsByName('login')[0]
+var txtSenhaCadastro2 = document.getElementsByName('senha2')[0]
+var btnCadastrar = document.getElementById('btnCadastrar')
 
 //Eventos DOM
 document.getElementById('btnMenu').addEventListener('click',mostrarMenu)
@@ -9,6 +11,7 @@ document.querySelector('header nav button').addEventListener('click',esconderMen
 document.getElementById('btnAjudaLogin').addEventListener('click',ensinarComoLogar)
 document.getElementsByName('login')[0].addEventListener('keyup',validarAppCPFLogin)
 document.getElementsByName('login')[0].addEventListener('blur',validarAppCPFLogin)
+txtSenhaCadastro2.addEventListener('blur',validarSenhasDeCadastro)
 
 //Funções
 function criarBotãoDoMenu(){
@@ -135,6 +138,17 @@ function consultarAsMinhasDenuncias(){
     if (isAnonimo == true){
         alert("O rastreamento é feito por usuários autenticados por questões de segurança e consentimento.")
         carregarPaginaDe('Principal')
+    }
+}
+function validarSenhasDeCadastro(){
+    var txtSenhaCadastro = document.getElementsByName('senha1')[0].value
+    var txtSenhaCadastro2V = txtSenhaCadastro2.value
+
+    if (txtSenhaCadastro != txtSenhaCadastro2V){
+        alert("As senhas não coincidem")
+        btnCadastrar.disabled = true
+    } else {
+        btnCadastrar.disabled = false
     }
 }
 function validarAppCPFLogin(){
