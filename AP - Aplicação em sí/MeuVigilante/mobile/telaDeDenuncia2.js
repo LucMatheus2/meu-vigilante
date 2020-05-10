@@ -8,7 +8,8 @@ export default class TelaDeDenuncia2 extends Component{
                 <Text>Processo de Denúncia</Text>
                 <Text>O que está acontecendo?</Text>
                 <TextInput numberOfLines={5}/>
-                <Button title="Aperte Aqui para marcar a localização"/>
+                <Button title="Marcar a localização"/>
+                <Button title="Anexar Foto"/>
             </View>
         );
     }
