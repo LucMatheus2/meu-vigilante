@@ -18,6 +18,7 @@
 
             return $stmt->execute();
         }
+
         public function listarUsuario($conexao){
             $cpf = $this->getCPF();
             $resposta = $conexao->query("SELECT * FROM ".DENUNCIANTES." WHERE CPF = '$cpf'");
@@ -27,6 +28,12 @@
                 $this->setNome($dados['Nome']);
                 $this->setSenha($dados['Senha']);
             }
+        }
+
+        public function deletarUsuario($conexao){
+            $cpf = $this->getCPF();
+            $resposta = $conexao->query("DELETE * FROM ".DENUNCIANTES." WHERE CPF = '$cpf'");
+            return $resposta
         }
 
         //Gets & Sets
