@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, Button , TextInput , StyleSheet, Image, ImageBackground } from 'react-native';
 
 
 //Funções
-export default class TelaDeCadastro extends Component {
-    render(){
+export default function TelaDeCadastro({navigation}) {
         return(
             <ImageBackground source={require('./img/fundoAplicativoLight.svg.png')} style={Design.containerCenario}>
                 <View style={Design.container}>
@@ -22,12 +21,14 @@ export default class TelaDeCadastro extends Component {
                     <TextInput placeholder="Digite a sua senha" maxLength={20}/>
                 </View>
                 <View style={Design.container}>
-                    <View style={Design.containerBtn}><Button title={"Cadastrar-se"} color="#028047"/></View>
-                    <View style={Design.containerBtn}><Button title={"Voltar"}/></View>
+                    <View style={Design.containerBtn}><Button title={"Cadastrar-se"} color="#028047" onPress={() => alert('Falta o Ajax XD')}/></View>
+                    <View style={Design.containerBtn}><Button title={"Voltar"} onPress={() => navigation.navigate('Login')}/></View>
+                </View>
+                <View style={{backgroundColor:"#001c7d",height:30,alignItems:"center"}}>
+                    <Text style={{color:'#FFF'}}>&copy; 2020 - Universidade do Estado do Pará</Text>
                 </View>
             </ImageBackground>
         );
-    }
 }
 
 //CSS

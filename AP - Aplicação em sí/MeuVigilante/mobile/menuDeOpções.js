@@ -1,19 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View,Text,StyleSheet,Button,ImageBackground} from 'react-native';
 
-export default class MenuDeOpções extends Component{
-    render(){
-        return(
-            <View style={Design.container}>
-                <ImageBackground source={require("./img/fundoAplicativoLight.svg.png")} style={Design.cenario}>
-                    <View style={Design.titulo}><Text style={{fontSize:24}}>Escolha a sua opção</Text></View>
-                    <View style={Design.btn}><Button title={"Cadastrar Denúncia"} style={Design.btn} color="#F00"/></View>
-                    <View style={Design.btn}><Button title={"Listagem de Denúncias"} style={Design.btn} color="#00804f"/></View>
-                    <View style={Design.btn}><Button title={"Log Out"} color="#333"/></View>
-                </ImageBackground>
-            </View>
-        );
-    }
+export default function MenuDeOpções({route,navigation}){
+    const { userCPF } = route.params;
+    return(
+        <View style={Design.container}>
+            <ImageBackground source={require("./img/fundoAplicativoLight.svg.png")} style={Design.cenario}>
+                <View style={Design.titulo}><Text style={{fontSize:24}}>Escolha a sua opção</Text></View>
+                <View style={Design.btn}><Button title={"Cadastrar Denúncia"} style={Design.btn} color="#F00" onPress={() => navigation.navigate('TelaDeDenúncia')}/></View>
+                <View style={Design.btn}><Button title={"Listagem de Denúncias"} style={Design.btn} color="#00804f" onPress={() => alert("Em Construção")}/></View>
+                <View style={Design.btn}><Button title={"Sair"} color="#333" onPress={() => navigation.navigate('Login')}/></View>
+            </ImageBackground>
+        </View>
+    );
 }
 
 const Design = StyleSheet.create({

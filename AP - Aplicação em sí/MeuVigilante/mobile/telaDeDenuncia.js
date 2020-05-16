@@ -1,8 +1,7 @@
-import React,{Component} from 'react';
+import React from 'react';
 import {View,SafeAreaView,Text,StyleSheet,ImageBackground,Image, Button,ScrollView} from 'react-native';
 
-export default class TelaDeDenuncia extends Component{
-    render(){
+export default function TelaDeDenuncia({navigation}){
         return (
             <ImageBackground source={require('./img/fundoAplicativoLight.svg.png')} style={Design.containerCenario}>
                 <SafeAreaView style={Design.container}>
@@ -30,7 +29,6 @@ export default class TelaDeDenuncia extends Component{
                 </SafeAreaView>
             </ImageBackground>
         );
-    }
 }
 
 const Design = StyleSheet.create({
