@@ -27,6 +27,13 @@ CREATE TABLE mv_tb_denunciante(
     CPF varchar(14) PRIMARY KEY,
     Nome varchar(60),
     Senha varchar(128)
+    Email varchar(110),
+)DEFAULT CHARSET=utf8;
+
+CREATE TABLE mv_tb_fiscal(
+    Email varchar(100) PRIMARY KEY,
+    Nome varchar(60),
+    Senha varchar(128)
 )DEFAULT CHARSET=utf8;
 
 /* Inserindo registros */

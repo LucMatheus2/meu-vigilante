@@ -10,7 +10,7 @@
 
         //Métodos
         public function cadastrarUsuario($conexao) {
-            $stmt = $conexao->prepare("INSERT INTO ".DENUNCIANTES." VALUES (?,?,?)");
+            $stmt = $conexao->prepare("INSERT INTO ".DENUNCIANTES."(CPF,Nome,Senha,Classe) VALUES (?,?,?,DEFAULT)");
             
             $stmt->bindValue(1,$this->getCPF());
             $stmt->bindValue(2,$this->getNome());
@@ -20,20 +20,32 @@
         }
 
         public function listarUsuario($conexao){
-            $cpf = $this->getCPF();
-            $resposta = $conexao->query("SELECT * FROM ".DENUNCIANTES." WHERE CPF = '$cpf'");
+            $stmt = $conexao->prepare("SELECT * FROM ".DENUNCIANTES." WHERE CPF = ? AND Senha = ? AND privilegio = '2'");
             
-            foreach ($resposta as $dados){
-                $this->setCPF($dados['CPF']);
-                $this->setNome($dados['Nome']);
-                $this->setSenha($dados['Senha']);
+            $stmt->bindValue(1,$this->getCPF());
+            $stmt->bindValue(2,$this->getSenha());
+
+            $stmt->execute();
+
+            if ($stmt->rowCount() == 1){
+                $resposta = [];
+                foreach ($stmt as $usuarios){
+                    $resposta = [
+                    "CPF" => $usuarios['CPF'],
+                    "Usuario" => $usuarios['Nome']
+                    ];
+                }
+            } else {
+                $resposta = false;
             }
+
+            return $resposta;
         }
 
         public function deletarUsuario($conexao){
             $cpf = $this->getCPF();
             $resposta = $conexao->query("DELETE * FROM ".DENUNCIANTES." WHERE CPF = '$cpf'");
-            return $resposta
+            return $resposta;
         }
 
         //Gets & Sets

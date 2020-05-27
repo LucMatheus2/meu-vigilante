@@ -8,7 +8,9 @@
      $usuario = new Denunciante();
 
      $usuario->setCPF($_POST['cpf']);
-     $usuario->listarUsuario($conexão);
+     $usuario->setSenha($_POST['senha']);
+
+     $resposta = $usuario->listarUsuario($conexão);
     
-     echo json_encode($usuario);
+     echo json_encode($resposta);
      unset($usuario);

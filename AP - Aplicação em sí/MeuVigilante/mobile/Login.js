@@ -8,12 +8,42 @@ const [cpf, setCPF] = React.useState('');
 const [senha, setSenha] = React.useState('');
 
 //Funções
-function logar(){
-    alert(`CPF : ${cpf}\nSenha: ${senha}`);
+function logar(telas){
+    let jsCPF = cpf;
+    jsCPF = jsCPF.toString();
+    if (jsCPF.length < 11){
+        alert("O seu CPF está incompleto!.\n\nDigite todos os digitos do seu documento sem pontos ou traços e depois aperte em ENTRAR.");
+    } 
+    else {
+        telas.navigate('MenuPrincipal',{userCPF:cpf,user:'Teste'});
+        /*fetch('http://localhost/MeuVigilante/backend/control/listarUsuario.control.php',{
+            method:'POST',
+            header:{
+                'Accept':'application/json',
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify({
+                cpf:cpf,
+                senha:senha
+            })
+        })
+        .then((r) =>{
+            if (r == false){
+                alert("Usuário não encontrado.\n\nVerifique se você digitou todos os dados solicitados corretamente.");
+            } else {
+                telas.navigate('MenuPrincipal',{cpf:r.CPF,usuario:r.Usuario});
+            }
+        })
+        .catch((e) => {
+                alert("Houve um erro de conexão com o banco de dados");
+                console.log(e);
+            }
+        );*/
+    }
 }
 function entrarComoAnonimo(nav){
     alert("Você estará entrando no modo anônimo");
-    nav.navigate('TelaDeDenúncia');
+    nav.navigate('TelaDeDenúncia',{userCPF:'00000000000',user:'Anônimo'});
 }
  
         return(
@@ -29,7 +59,7 @@ function entrarComoAnonimo(nav){
                     <TextInput placeholder="Digite a sua senha" maxLength={20} secureTextEntry={true} onChangeText={senha => setSenha(senha)}/>
                 </View>
                 <View style={Design.container}>
-                    <View style={Design.btn}><Button title={"Log in"}  color="#028047" onPress={() => navigation.navigate('MenuPrincipal',{userCPF:cpf})}/></View>
+                    <View style={Design.btn}><Button title={"Entrar"}  color="#028047" onPress={() => {logar(navigation)}}/></View>
                     <View style={Design.btn}><Button title={"Entrar como Anônimo"} color="#333" onPress={() => entrarComoAnonimo(navigation)}/></View>
                     <View style={Design.btn}><Button title={"Cadastre-se"} color="#028047" onPress={() => navigation.navigate('TelaDeCadastro')}/></View>
                 </View>

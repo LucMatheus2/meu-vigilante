@@ -55,6 +55,36 @@
             return $resultado;
         }
 
+        public function listarTodasAsDenuncias($conexão){
+            $resultado = [];
+            $i = 0;
+
+            $lista = $conexão->query("SELECT d.Cod_Serie as Cod,
+            d.Denunciante,
+            d.Descricao as Texto,
+            d.Latitude,
+            d.Longitude,
+            d.Data,
+            e.Descricao as Estado
+            FROM ".DENÚNCIAS." as d INNER JOIN ".ESTADOS." as e ON e.Cod_estado = d.Estado
+            ORDER BY Data DESC");
+
+            foreach ($lista as $pilha){
+                $resultado[$i] = [
+                    "CodSerie" => $pilha['Cod'],
+                    "Denuncia" => $pilha['Texto'],
+                    "Denunciante" => $pilha['Denunciante'],
+                    "Latitude" => $pilha['Latitude'],
+                    "Longitude" => $pilha['Longitude'],
+                    "Data" => date('d/m/Y',strtotime($pilha['Data'])),
+                    "Estado" => $pilha['Estado'],
+                ];
+                $i++;
+            }
+
+            return $resultado;
+        }
+
         //Gets & Sets
         public function getCodDenuncia(){
             return $this->codDenuncia;
