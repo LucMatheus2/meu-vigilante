@@ -22,17 +22,8 @@ export default function TelaDeCadastro({navigation}) {
         function Cadastrar(){
             let validadeSenhas = validarSenhas();
             if (validadeSenhas == true) {
-                fetch('http://www.estudiodoluk.com.br/dev/MeuVigilante/control/cadastrarUsuario.control.php',{
-                    method:'POST',
-                    header:{
-                        'Accept':'application/json',
-                        'Content-type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        cpf:cpf,
-                        nome:nome,
-                        senha:senha1
-                    })
+                fetch(`http://www.estudiodoluk.com.br/dev/MeuVigilante/control/cadastrarUsuario.control.php?cpf=${cpf}&nome=${nome}&senha=${senha1}`,{
+                    method:'GET'
                 })
                 .then(resposta => resposta.json())
                 .then((r) => {

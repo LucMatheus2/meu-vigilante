@@ -16,24 +16,15 @@ function logar(telas){
     } 
     else {
 
-        fetch('http://www.estudiodoluk.com.br/dev/MeuVigilante/control/listarUsuario.control.php',{
-            method:'POST',
-            header:{
-                'Accept':'application/json',
-                'Content-type':'application/json'
-            },
-            body:JSON.stringify({
-                cpf:cpf,
-                senha:senha
-            })
+        fetch(`http://www.estudiodoluk.com.br/dev/MeuVigilante/control/listarUsuario.control.php?cpf=${cpf}&senha=${senha}`,{
+            method:'GET'
         })
         .then((resposta) => resposta.json())
         .then((r) =>{
             if (r == false){
                 alert("Usuário não encontrado.\n\nVerifique se você digitou todos os dados solicitados corretamente.");
             } else {
-                alert('Deu certo');
-                //telas.navigate('MenuPrincipal',{cpf:r.CPF,usuario:r.Usuario});
+                telas.navigate('MenuPrincipal',{userCPF:r.CPF,user:r.Usuario});
             }
         })
         .catch((e) => {
