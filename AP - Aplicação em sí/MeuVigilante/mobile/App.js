@@ -11,6 +11,8 @@ import TelaDeCadastro from './src/telaDeCadastro';
 import ListagemDeDenúncia from './src/ListagemDenuncias';
 import CartãoDeDenúncia from './src/CartaoDenuncia';
 import TelaDeDenuncia from './src/telaDeDenuncia';
+import TelaDeAvisoAnônimo from './src/TelaDeAvisoAnonimo';
+import MenuAnônimoDeOpções from './src/TelaDeMenuAnonimo';
 
 const Telas = createStackNavigator();
 
@@ -20,7 +22,9 @@ export default function App() {
                 <Telas.Navigator>                    
                     <Telas.Screen name="Login" component={Login} options={{title:'Bem-vindo'}}/>
                     <Telas.Screen name="TelaDeCadastro" component={TelaDeCadastro} options={{title:'Tela De Cadastro'}}/>                       
+                    <Telas.Screen name="TelaDeAvisoAnonimo" component={TelaDeAvisoAnônimo} options={{title:'???'}}/>
                     <Telas.Screen name="MenuPrincipal" component={MenuDeOpções} options={{title:'Menu de Opções'}}/>
+                    <Telas.Screen name="MenuPrincipalAnon" component={MenuAnônimoDeOpções} options={{title:'Menu de Opções?'}} />
                     <Telas.Screen name="ListagemDeDenúncia" component={ListagemDeDenúncia} options={{title:'Listagem De Denúncias'}}/>
                     <Telas.Screen name="CartãoDeDenúncia" component={CartãoDeDenúncia} options={{title:"Denúncia"}}/>
                     <Telas.Screen name="TelaDeDenúncia" component={TelaDeDenuncia} options={{title:'Tela de denúncia'}}/>

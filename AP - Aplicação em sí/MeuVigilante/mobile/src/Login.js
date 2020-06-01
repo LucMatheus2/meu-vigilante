@@ -15,8 +15,8 @@ function logar(telas){
         alert("O seu CPF está incompleto!.\n\nDigite todos os digitos do seu documento sem pontos ou traços e depois aperte em ENTRAR.");
     } 
     else {
-        telas.navigate('MenuPrincipal',{userCPF:cpf,user:'Teste'});
-        /*fetch('http://localhost/MeuVigilante/backend/control/listarUsuario.control.php',{
+
+        fetch('http://www.estudiodoluk.com.br/dev/MeuVigilante/control/listarUsuario.control.php',{
             method:'POST',
             header:{
                 'Accept':'application/json',
@@ -27,23 +27,24 @@ function logar(telas){
                 senha:senha
             })
         })
+        .then((resposta) => resposta.json())
         .then((r) =>{
             if (r == false){
                 alert("Usuário não encontrado.\n\nVerifique se você digitou todos os dados solicitados corretamente.");
             } else {
-                telas.navigate('MenuPrincipal',{cpf:r.CPF,usuario:r.Usuario});
+                alert('Deu certo');
+                //telas.navigate('MenuPrincipal',{cpf:r.CPF,usuario:r.Usuario});
             }
         })
         .catch((e) => {
                 alert("Houve um erro de conexão com o banco de dados");
                 console.log(e);
             }
-        );*/
+        );
     }
 }
 function entrarComoAnonimo(nav){
-    alert("Você estará entrando no modo anônimo");
-    nav.navigate('TelaDeDenúncia',{userCPF:'00000000000',user:'Anônimo'});
+    nav.navigate('TelaDeAvisoAnonimo');
 }
  
         return(
