@@ -5,13 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 //Telas
-import Login from './Login';
-import MenuDeOpções from './menuDeOpções';
-import TelaDeCadastro from './telaDeCadastro';
-import ListagemDeDenúncia from './ListagemDenuncias';
-import CartãoDeDenúncia from './CartaoDenuncia';
-import TelaDeDenuncia from './telaDeDenuncia';
-import TelaDeDenuncia2 from './telaDeDenuncia2';
+import Login from './src/Login';
+import MenuDeOpções from './src/menuDeOpções';
+import TelaDeCadastro from './src/telaDeCadastro';
+import ListagemDeDenúncia from './src/ListagemDenuncias';
+import CartãoDeDenúncia from './src/CartaoDenuncia';
+import TelaDeDenuncia from './src/telaDeDenuncia';
 
 const Telas = createStackNavigator();
 
@@ -25,7 +24,6 @@ export default function App() {
                     <Telas.Screen name="ListagemDeDenúncia" component={ListagemDeDenúncia} options={{title:'Listagem De Denúncias'}}/>
                     <Telas.Screen name="CartãoDeDenúncia" component={CartãoDeDenúncia} options={{title:"Denúncia"}}/>
                     <Telas.Screen name="TelaDeDenúncia" component={TelaDeDenuncia} options={{title:'Tela de denúncia'}}/>
-                    <Telas.Screen name="TelaDeDenúncia2" component={TelaDeDenuncia2} options={{title:'Tela de denúncia 2'}}/>
                 </Telas.Navigator>
             </NavigationContainer>
         );
