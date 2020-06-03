@@ -3,13 +3,13 @@
     header('Access-Control-Allow-Origin:*');
    
     require_once '../model/Denunciante.class.php';
-    include_once '../model/conexão.php';
+    include_once '../model/conexao.php';
 
     $usuario = new Denunciante();
 
-    $usuario->setCPF($_POST['cpf']);
-    $usuario->setNome($_POST['nome']);
-    $usuario->setSenha($_POST['senha']);
+    $usuario->setCPF($_GET['cpf']);
+    $usuario->setNome($_GET['nome']);
+    $usuario->setSenha($_GET['senha']);
 
     $resp = $usuario->cadastrarUsuario($conexão);
     echo json_encode($resp);

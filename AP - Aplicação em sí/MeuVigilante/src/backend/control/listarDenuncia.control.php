@@ -2,12 +2,12 @@
     header('Content-type:application/json');
     header('Access-Control-Allow-Origin:*');
     
-    require_once '../model/Denúncia.class.php';
-    include_once '../model/conexão.php';
+    require_once '../model/Denuncia.class.php';
+    include_once '../model/conexao.php';
     
     $Denúncia = new Denúncia();
 
-    $Denúncia->setDenunciante($_POST['Denunciante']);
+    $Denúncia->setDenunciante($_GET['Denunciante']);
 
     $resp = $Denúncia->listarDenuncias($conexão);
     echo json_encode($resp);

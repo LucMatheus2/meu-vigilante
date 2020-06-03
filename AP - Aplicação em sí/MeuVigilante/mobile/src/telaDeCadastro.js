@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button , TextInput , StyleSheet, Image, ImageBackground } from 'react-native';
+import {Alert, View, Text, Button , TextInput , StyleSheet, Image, ImageBackground } from 'react-native';
 
 
 //Funções
@@ -28,14 +28,16 @@ export default function TelaDeCadastro({navigation}) {
                 .then(resposta => resposta.json())
                 .then((r) => {
                     if(r == true){
-                        alert("Usuário cadastrado com sucesso");
+                        Alert.alert("","Usuário cadastrado com sucesso");
+                        navigation.navigate('Login');
                     } else {
-                        alert("Erro ao efetuar o cadastro");
+                        Alert.alert("Erro de cadastro","Erro ao efetuar o cadastro, o usuário já existe ou apresenta inconsistência nos seus dados.");
                         console.log(r)
                     }
                 })
                 .catch((e) => {
-                    alert("Houve um erro de conexão no banco de dados");
+                    Alert.alert("Erro de conexão no banco de dados","Contate o programador mais próximo");
+                    console.log(e);
                 })
             }
         }

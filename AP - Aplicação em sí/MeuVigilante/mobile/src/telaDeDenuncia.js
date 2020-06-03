@@ -1,46 +1,55 @@
 import React, { useEffect } from 'react';
-import {View, Button ,Text,TextInput, StyleSheet, ImageBackground, PermissionsAndroid} from 'react-native';
+import {Alert, View, Button ,Text,TextInput, StyleSheet, ImageBackground, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import ImagePicker from 'react-native-image-picker';
+import Axios from 'axios';
 
 export default function TelaDeDenuncia({route,navigation}){
         const { userCPF,user } = route.params;
-        const [denuncia,setDenuncia] = React.useState()
+        const [denuncia,setDenuncia] = React.useState('');
 
         const [permissaoLocalizacao,setPermissaoLocalizacao] = React.useState(false);
-        const [posicao,setPosicao] = React.useState('0');
+        const [posicao,setPosicao] = React.useState(false);
+        const [foto,setFoto] = React.useState();
+       
 
-        function marcarLocalização(){
-            async function verificarPermissao(){
-                try{
-                    const garantia = await PermissionsAndroid.request(
-                        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-                    );
-                    if (garantia === PermissionsAndroid.RESULTS.GRANTED){
-                        setPermissaoLocalizacao(true);
-                    }
-                    console.log('Depurou 2')
-                }
-                catch (exceção) {
-                    console.log('Erro')
+        async function verificarPermissao(){
+            try{
+                const garantia = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+                );
+                if (garantia === PermissionsAndroid.RESULTS.GRANTED){
+                    setPermissaoLocalizacao(true);
                 }
             }
-            
-            useEffect(() => {
-                verificarPermissao()
-                if (permissaoLocalizacao == true) {
-                    Geolocation.getCurrentPosition(
-                        coords => {
-                            setPosicao({
-                                latitude:coords.coords.latitude,
-                                longitude:coords.coords.longitude
-                            });
-                        },
-                        erro => {
-                            console.log('Erro na localização \n '+erro)
-                        }
-                    );
-                }
-            },[permissaoLocalizacao])
+            catch (exceção) {
+                console.log('Erro')
+            }
+        }
+
+        useEffect(() => {
+            verificarPermissao()
+            if (permissaoLocalizacao == true) {
+                Geolocation.getCurrentPosition(
+                    coords => {
+                        setPosicao({
+                            latitude:coords.coords.latitude,
+                            longitude:coords.coords.longitude
+                        });
+                    },
+                    erro => {
+                        console.log('Erro na localização \n '+erro)
+                    }
+                );
+            }
+        },[permissaoLocalizacao])
+
+        function marcarLocalizacao(){
+            if (permissaoLocalizacao == true) {
+                Alert.alert('Localização marcada','As localizações estão marcadas'); 
+            } else {
+                Alert.alert('Requisito Necessário','Você precisa conceder a permissão de Geolocalização')
+            }
         }
         
         function cancelarDenuncia(rotas){
@@ -53,23 +62,44 @@ export default function TelaDeDenuncia({route,navigation}){
         }
 
         function efetuarDenuncia(telas){
-            fetch(`http://www.estudiodoluk.com.br/dev/MeuVigilante/control/efetuarDenuncia.control.php?Denunciante=${userCPF}&Denuncia=${denuncia}&Latitude=${posicao}&Longitude=${posicao}&Foto=null`,{
+            fetch(`http://www.estudiodoluk.com.br/dev/MeuVigilante/control/efetuarDenuncia.control.php?Denunciante=${userCPF}&Denuncia=${denuncia}&Latitude=${posicao.latitude}&Longitude=${posicao.longitude}&Foto=${foto.fileName}`,{
                 method:'GET'
             })
             .then(resposta => resposta.json())
             .then((r) => {
                 if (r == true){
-                    alert("Denúncia efetuado com sucesso")
+                    //enviarImagem();
+                    Alert.alert("","Denúncia Efetuada\nCom Sucesso");
                     cancelarDenuncia(telas)
                 } else {
-                    alert("Houve um erro no arquivamento da sua denúncia")
+                    Alert.alert("Houve um erro no arquivamento da sua denúncia","Verifique se não deixou dados em branco ou a sua conexão com a internet");
                     cancelarDenuncia(telas)
                 }
             })
             .catch((e) => {
-                alert("Houve um erro ao se conectar com o banco de dados");
+                Alert.alert("Houve um erro ao se conectar com o banco de dados","Contate o programador mais próximo");
                 console.log(e)
             })
+        }
+
+        //Função de retorno da Imagem
+        function retornoDeImagem(dados){
+            if (dados.type != "image/jpeg") {
+                Alert.alert('Imagem incompatível','O aplicativo não aceita imagens ou desenhos, por favor envie uma FOTO!');
+                return;
+            } else {
+                setFoto(dados);
+            }
+        }
+
+        //Função de envio da Imagem
+        async function enviarImagem(){
+            const MetaFoto = new FormData();
+            MetaFoto.append('MetaFoto',{
+                url:foto.uri,
+                nome:foto.fileName
+            })
+            await Axios.post('http://www.estudiodoluk.com.br/dev/MeuVigilante/control/efetuarDenuncia.control.php',MetaFoto)
         }
 
         return(
@@ -78,8 +108,8 @@ export default function TelaDeDenuncia({route,navigation}){
                     <Text style={{fontSize:24}}>Processo de Denúncia</Text>
                     <Text style={{marginTop:12}}>O que está acontecendo?</Text>
                     <TextInput numberOfLines={5} style={{backgroundColor:'#FFF',width:'90%'}} placeholder="Escreva o fato ocorrido" onChangeText={text => setDenuncia(text)}/>
-                    <View style={{flexDirection:"row"}}><Button title="Anexar Foto" color="#028047"/>
-                    <Button title="Marcar Localização" onPress={marcarLocalização}/></View>
+                    <View style={{flexDirection:"row"}}><Button title="Anexar Foto" color="#028047" onPress={() => ImagePicker.showImagePicker({title:'Escolha a opção'},retornoDeImagem)}/>
+                    <Button title="Marcar Localização" onPress={marcarLocalizacao} /></View>
                     <View style={{marginTop:15}}><Button color="#F00" title="Efetuar Denúncia" onPress={() => efetuarDenuncia(navigation)}/></View>
                     <View style={{marginTop:15}}><Button color="#000" title="Cancelar" onPress={() => {cancelarDenuncia(navigation)}}/></View>
                 </View>

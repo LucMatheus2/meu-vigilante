@@ -1,32 +1,43 @@
 import React from 'react';
-import { View, Text, Button , TextInput , StyleSheet, ImageBackground, Image } from 'react-native';
+import { Alert,View, Text, Button , TextInput , StyleSheet, ImageBackground, Image } from 'react-native';
 
 export default function Login({navigation}) {
 
-//Objetos
+//Hooks de CPF e Senha
 const [cpf, setCPF] = React.useState('');
 const [senha, setSenha] = React.useState('');
 
-//Funções
+
+// Responsável pelo login e pelas validações
 function logar(telas){
     let jsCPF = cpf;
     jsCPF = jsCPF.toString();
+    
+    // Verifica se digitou o CPF corretamente
     if (jsCPF.length < 11){
-        alert("O seu CPF está incompleto!.\n\nDigite todos os digitos do seu documento sem pontos ou traços e depois aperte em ENTRAR.");
+        Alert.alert("O seu CPF está incompleto!","Digite todos os digitos do seu documento sem pontos ou traços e depois aperte em ENTRAR.");
     } 
     else {
-
+        //Chamada do controle para logar, diferente do Ajax ele retorna uma "Promessa"
         fetch(`http://www.estudiodoluk.com.br/dev/MeuVigilante/control/listarUsuario.control.php?cpf=${cpf}&senha=${senha}`,{
             method:'GET'
         })
+        //Os dados são convertidos para JSON
         .then((resposta) => resposta.json())
+        
+        //Caso a busca seja bem sucedida
         .then((r) =>{
+            
+            //Caso o usuário não exista
             if (r == false){
-                alert("Usuário não encontrado.\n\nVerifique se você digitou todos os dados solicitados corretamente.");
-            } else {
+                Alert.alert("Usuário não encontrado","Verifique se você digitou todos os dados solicitados corretamente.");
+            } 
+            // Final feliz
+            else {
                 telas.navigate('MenuPrincipal',{userCPF:r.CPF,user:r.Usuario});
             }
         })
+        // Erro por falta de conexão com o banco de dados
         .catch((e) => {
                 alert("Houve um erro de conexão com o banco de dados");
                 console.log(e);
@@ -34,6 +45,8 @@ function logar(telas){
         );
     }
 }
+
+//Chamada para a tela anônima
 function entrarComoAnonimo(nav){
     nav.navigate('TelaDeAvisoAnonimo');
 }
@@ -46,7 +59,7 @@ function entrarComoAnonimo(nav){
                 </View>
                 <View style={Design.container}>
                     <Text>CPF: </Text>
-                    <TextInput placeholder="Digite o seu CPF" keyboardType={"number-pad"} maxLength={11} onChangeText={cpf => setCPF(cpf)}/>
+                    <TextInput placeholder="Digite o seu CPF" keyboardType={"number-pad"} maxLength={11} onChangeText={(cpf) => {setCPF(cpf)}} />
                     <Text>Senha: </Text>
                     <TextInput placeholder="Digite a sua senha" maxLength={20} secureTextEntry={true} onChangeText={senha => setSenha(senha)}/>
                 </View>

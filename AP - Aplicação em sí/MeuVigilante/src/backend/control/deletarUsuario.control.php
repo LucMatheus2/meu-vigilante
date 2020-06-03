@@ -3,7 +3,7 @@
     header('Access-Control-Allow-Origin:*');
    
     require_once '../model/Denunciante.class.php';
-    include_once '../model/conexão.php';
+    include_once '../model/conexao.php';
 
     $usuario = new Denunciante();
 

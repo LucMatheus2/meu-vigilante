@@ -1,5 +1,5 @@
 <?php
-    include_once '../../ini.php';
+    include_once '../ini.php';
 
     class Denunciante{
         
@@ -10,7 +10,7 @@
 
         //Métodos
         public function cadastrarUsuario($conexao) {
-            $stmt = $conexao->prepare("INSERT INTO ".DENUNCIANTES."(CPF,Nome,Senha,Classe) VALUES (?,?,?,DEFAULT)");
+            $stmt = $conexao->prepare("INSERT INTO ".DENUNCIANTES."(CPF,Nome,Senha) VALUES (?,?,?)");
             
             $stmt->bindValue(1,$this->getCPF());
             $stmt->bindValue(2,$this->getNome());
@@ -20,7 +20,7 @@
         }
 
         public function listarUsuario($conexao){
-            $stmt = $conexao->prepare("SELECT * FROM ".DENUNCIANTES." WHERE CPF = ? AND Senha = ? AND privilegio = '2'");
+            $stmt = $conexao->prepare("SELECT * FROM ".DENUNCIANTES." WHERE CPF = ? AND Senha = ?");
             
             $stmt->bindValue(1,$this->getCPF());
             $stmt->bindValue(2,$this->getSenha());

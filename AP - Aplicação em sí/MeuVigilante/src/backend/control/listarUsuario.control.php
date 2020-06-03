@@ -3,12 +3,12 @@
      header('Access-Control-Allow-Origin:*');
     
      require_once '../model/Denunciante.class.php';
-     include_once '../model/conexão.php';
+     include_once '../model/conexao.php';
 
      $usuario = new Denunciante();
 
-     $usuario->setCPF($_POST['cpf']);
-     $usuario->setSenha($_POST['senha']);
+     $usuario->setCPF($_GET['cpf']);
+     $usuario->setSenha($_GET['senha']);
 
      $resposta = $usuario->listarUsuario($conexão);
     
