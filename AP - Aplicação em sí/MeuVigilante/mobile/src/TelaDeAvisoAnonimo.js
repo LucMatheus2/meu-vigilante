@@ -2,12 +2,15 @@ import React from 'react';
 import {View, Text, StyleSheet,Image ,Button,ImageBackground} from 'react-native';
 
 export default function TelaDeAvisoAnônimo({navigation}){
+    //Funções da página
     function irPraTelaDeDenunciaAnônima(transicao){
         transicao.navigate('MenuPrincipalAnon',{userCPF:'00000000000',user:'Anônimo'});
     }
     function irParaATelaDeLogin(transicao){
         transicao.navigate('Login');
     }
+
+    //==== TELA DE AVISO PARA O MODO ANÔNIMO ====
     return(
         <ImageBackground source={require('../img/fundoAplicativoP&B.svg.png')} style={Design.containerCenario}>
             <View style={Design.container}>
@@ -21,6 +24,7 @@ export default function TelaDeAvisoAnônimo({navigation}){
     );
 }
 
+// Interface / CSS
 const Design = StyleSheet.create({
     container:{
         backgroundColor:'#000',

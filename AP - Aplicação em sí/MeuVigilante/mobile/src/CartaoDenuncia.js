@@ -2,11 +2,18 @@ import React from 'react';
 import { View , Text , StyleSheet , ImageBackground , Button } from 'react-native';
 
 
+// Tela de denúncia
 export default function CartãoDeDenúncia({route,navigation}){
     
+    //Variáveis de transição de tela - NÃO ALTERE NENHUMA DELAS
     const {userCPF,codDenuncia} = route.params;
     const [Denuncia,setDenuncia] = React.useState('');
 
+
+    /**
+     * Função assincrona que é a principal forma de resgatar os dados da denúncia para apresentação ao usuário
+     * INFO : o fetch é o ajax nativo do Javascript
+     */
     fetch(`http://www.estudiodoluk.com.br/dev/MeuVigilante/control/catalogarDenuncia.control.php?Denuncia=${codDenuncia}`,{method:'GET'})
     .then((resposta) => resposta.json())
     .then((r) => {
@@ -38,6 +45,10 @@ export default function CartãoDeDenúncia({route,navigation}){
     );
 }
 
+/**
+ * Interface gráfica do aplicativo, layout dos elementos comuns
+ * semelhante aos CSSs no HTML porém com uma sintaxe semelhante
+ */ 
 const Design = StyleSheet.create({
     containerCenario:{
         flex:1,

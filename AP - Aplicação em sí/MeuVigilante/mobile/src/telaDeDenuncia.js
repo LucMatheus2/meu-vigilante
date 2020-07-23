@@ -1,18 +1,27 @@
 import React, { useEffect } from 'react';
 import {Alert, View, Button ,Text,TextInput, StyleSheet, ImageBackground, PermissionsAndroid} from 'react-native';
-import Geolocation from 'react-native-geolocation-service';
+
+// Bibliotecas externas - necessitam importação dos pacotes via npm ou yarn
+import Geolocation from 'react-native-geolocation-service'; // <- from 'nome do pacote'
 import ImagePicker from 'react-native-image-picker';
 import Axios from 'axios';
 
 export default function TelaDeDenuncia({route,navigation}){
+        // Variaveis de controle - NÃO MEXA
         const { userCPF,user } = route.params;
         const [denuncia,setDenuncia] = React.useState('');
 
+        // Informações de formulário
         const [permissaoLocalizacao,setPermissaoLocalizacao] = React.useState(false);
         const [posicao,setPosicao] = React.useState(false);
         const [foto,setFoto] = React.useState();
        
 
+        /**
+         * Função para verificações de permissões com o usuário
+         * Essa é uma função bastante sensivel, precaução é necessária
+         * a fazer quaisquer alterações.
+         */
         async function verificarPermissao(){
             try{
                 const garantia = await PermissionsAndroid.request(
@@ -52,6 +61,7 @@ export default function TelaDeDenuncia({route,navigation}){
             }
         }
         
+        //Função para cancelar a denúncia
         function cancelarDenuncia(rotas){
             let jsUserCPF = userCPF;
             if(jsUserCPF == '00000000000'){
@@ -61,6 +71,7 @@ export default function TelaDeDenuncia({route,navigation}){
             }
         }
 
+        //Função para efetivação da denúncia, ainda incompleta.
         function efetuarDenuncia(telas){
             fetch(`http://www.estudiodoluk.com.br/dev/MeuVigilante/control/efetuarDenuncia.control.php?Denunciante=${userCPF}&Denuncia=${denuncia}&Latitude=${posicao.latitude}&Longitude=${posicao.longitude}&Foto=${foto.fileName}`,{
                 method:'GET'
@@ -102,6 +113,7 @@ export default function TelaDeDenuncia({route,navigation}){
             await Axios.post('http://www.estudiodoluk.com.br/dev/MeuVigilante/control/efetuarDenuncia.control.php',MetaFoto)
         }
 
+        // ================================ TELA DE DENÚNCIA =========================
         return(
             <ImageBackground source={require('../img/fundoAplicativoLight.svg.png')} style={Design.containerCenario}>
                 <View style={Design.container}>
@@ -120,6 +132,7 @@ export default function TelaDeDenuncia({route,navigation}){
         );
 }
 
+// Interface / CSS
 const Design = StyleSheet.create({
     container:{
         flex:1,

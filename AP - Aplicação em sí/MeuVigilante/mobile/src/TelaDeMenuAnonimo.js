@@ -2,7 +2,10 @@ import React from 'react';
 import {View,Text,StyleSheet,Button,ImageBackground} from 'react-native';
 
 export default function MenuAnônimoDeOpções({route,navigation}){
+    // Variaveis de transição - NÃO MEXA
     const { userCPF,user } = route.params;
+    
+    //============= TELA DE MENU (ANÔNIMO) ==============
     return(
         <View style={Design.container}>
             <ImageBackground source={require("../img/fundoAplicativoP&B.svg.png")} style={Design.cenario}>
@@ -14,6 +17,7 @@ export default function MenuAnônimoDeOpções({route,navigation}){
     );
 }
 
+// Interface / CSS
 const Design = StyleSheet.create({
     cenario:{
         width:"100%",

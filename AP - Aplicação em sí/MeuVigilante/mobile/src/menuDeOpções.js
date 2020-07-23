@@ -1,8 +1,12 @@
 import React from 'react';
 import {View,Text,StyleSheet,Button,ImageBackground} from 'react-native';
 
+// =================== TELA DO MENU ================================ //
 export default function MenuDeOpções({route,navigation}){
+
+    // Parametro de transição vinda da tela de Login - NÃO MEXA
     const { userCPF,user } = route.params;
+    
     return(
         <View style={Design.container}>
             <ImageBackground source={require("../img/fundoAplicativoLight.svg.png")} style={Design.cenario}>
@@ -15,6 +19,7 @@ export default function MenuDeOpções({route,navigation}){
     );
 }
 
+// "CSS"
 const Design = StyleSheet.create({
     cenario:{
         width:"100%",

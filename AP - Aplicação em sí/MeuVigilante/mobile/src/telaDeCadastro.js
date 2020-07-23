@@ -2,13 +2,16 @@ import React from 'react';
 import {Alert, View, Text, Button , TextInput , StyleSheet, Image, ImageBackground } from 'react-native';
 
 
-//Funções
 export default function TelaDeCadastro({navigation}) {
+        // Variáveis de controle -> NÃO ALTERE
         const [cpf,setCPF] = React.useState('');
         const [nome,setNome] = React.useState('');
         const [senha1,setSenha1] = React.useState('');
         const [senha2,setSenha2] = React.useState('');
     
+        /**
+         * Função de validação das senhas do programa
+         */
         function validarSenhas(){
                 let jsSenha1 = senha1;
                 let jsSenha2 = senha2;
@@ -19,6 +22,9 @@ export default function TelaDeCadastro({navigation}) {
                     return true;
                 }
         }
+        /**
+         * Efetivação do cadastro via uma função assincrona
+         */
         function Cadastrar(){
             let validadeSenhas = validarSenhas();
             if (validadeSenhas == true) {
@@ -41,6 +47,7 @@ export default function TelaDeCadastro({navigation}) {
                 })
             }
         }
+        // ======================== TELA DE CADASTRO ============================
         return(
             <ImageBackground source={require('../img/fundoAplicativoLight.svg.png')} style={Design.containerCenario}>
                 <View style={Design.container}>

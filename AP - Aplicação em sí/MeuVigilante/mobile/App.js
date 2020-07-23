@@ -20,6 +20,7 @@ const Telas = createStackNavigator();
 
 //Componente principal
 export default function App() {
+        //Telas
         return(
             <NavigationContainer>
                 <Telas.Navigator>                    

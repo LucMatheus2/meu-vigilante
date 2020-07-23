@@ -3,7 +3,7 @@ import {View,Button,Text,StyleSheet,ImageBackground,FlatList} from 'react-native
 
 export default function ListagemDeDenúncia({route,navigation}){
     
-    //Paramêtros obrigatórios da tela anterior
+    //Paramêtros obrigatórios da tela anterior - NÃO ALTERE
     const {userCPF} = route.params;
     
     // Preparação de uma lista - [!] NÃO É A FORMA MAIS RECOMENDADA PELO REACT MAS É A MAIS RÁPIDA
@@ -31,7 +31,8 @@ export default function ListagemDeDenúncia({route,navigation}){
         </ImageBackground>
     );
 }
-//CSS
+
+//O "CSS"
 const Design = StyleSheet.create({
     containerCenario:{
         flex:1,

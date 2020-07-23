@@ -50,7 +50,7 @@ function logar(telas){
 function entrarComoAnonimo(nav){
     nav.navigate('TelaDeAvisoAnonimo');
 }
- 
+ /* ======================= A TELA ============================ */
         return(
             <ImageBackground source={require('../img/fundoAplicativoLight.svg.png')} style={Design.containerCenario}>
                 <View style={Design.container}>
